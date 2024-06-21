@@ -1,44 +1,22 @@
 <html>
-  <head>
-    <title>example</title>
-  </head>
-  <body>
-    <script type="text/javascript" src="http://public.tableau.com/javascripts/api/tableau_v8.js"></script>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script>
-      var viz;
-      function refresh(){
-        viz.refreshDataAsync();
-      };
+    <head>
+        <!-- jQuery -->
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
-      function initializeViz(){
-        //--- conf ---//
-        // Replace this URL with your viz
-        var url = "http://tableau/views/-_0/-";
-	// Set interval in millisecods
-	var interval = 5000;
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 
-	var placeholderDiv = document.getElementById("content");
-        var options = {
-          hideTabs: true,
-          hideToolbar: true,
-          onFirstInteractive: function () {
-            // Refresh the viz every 5000 milliseconds
-            window.setInterval("refresh()",interval);
-          }
-        };
+        <!-- Tableau Extensions API Library  -->
+        <!-- La librería está almacenada en el directorio extensions-api/lib -->
+        <script src="lib/tableau.extensions.1.latest.js"></script>
 
-        try {
-          viz = new tableau.Viz(placeholderDiv, url, options);
-        }
-        catch(e){
-          alert(e);
-        }
-      };
-    </script>
-    <script type="text/javascript">
-      // Initialize the app on document ready.
-      $(initializeViz);  
-    </script>
-  </body>
+        <!-- El código Javascript que utilizará la extensión se coloca aquí -->
+        <script src="refresh.js"></script>
+
+    </head>
+    <body>
+        <div id="worksheets" class="p-2">
+        </div>
+    </body>    
 </html>
