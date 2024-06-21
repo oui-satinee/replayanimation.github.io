@@ -1,30 +1,44 @@
-<!DOCTYPE html>
 <html>
-  <style>
-    .container-header {
-      position: relative;
-      display: block;
-    }
-  </style>
   <head>
-    <title>Replay Animation Demo</title>
-
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-    <script src="../../../lib/tableau.extensions.1.latest.js"></script>
-
-    <!-- Our extension's code -->
-    <script src="../../../dist/replayAnimation.js"></script>
+    <title>example</title>
   </head>
   <body>
-    <div class="container">
-      <h2>Replay Animation Sample</h2>
-      <div id="replaySelector"></div>
-    </div>
+    <script type="text/javascript" src="http://public.tableau.com/javascripts/api/tableau_v8.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>
+      var viz;
+      function refresh(){
+        viz.refreshDataAsync();
+      };
+
+      function initializeViz(){
+        //--- conf ---//
+        // Replace this URL with your viz
+        var url = "http://tableau/views/-_0/-";
+	// Set interval in millisecods
+	var interval = 5000;
+
+	var placeholderDiv = document.getElementById("content");
+        var options = {
+          hideTabs: true,
+          hideToolbar: true,
+          onFirstInteractive: function () {
+            // Refresh the viz every 5000 milliseconds
+            window.setInterval("refresh()",interval);
+          }
+        };
+
+        try {
+          viz = new tableau.Viz(placeholderDiv, url, options);
+        }
+        catch(e){
+          alert(e);
+        }
+      };
+    </script>
+    <script type="text/javascript">
+      // Initialize the app on document ready.
+      $(initializeViz);  
+    </script>
   </body>
-</html> 
+</html>
